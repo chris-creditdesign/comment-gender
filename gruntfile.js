@@ -57,8 +57,9 @@ module.exports = function(grunt){
 						'assets/css/index.css',
 						'assets/concat/style-close.txt',
 						'assets/barchart.html',
+						'assets/concat/socket-io.txt',
 						'assets/concat/script-open.txt',
-						'assets/js/index.min.js',
+						'assets/js/index.js',
 						'assets/concat/script-close.txt',
 						'assets/polopoly-footer.html'
 						],
@@ -66,13 +67,13 @@ module.exports = function(grunt){
 			},
 			distIndex: {
 				src: [	
-						'assets/concat/style-open.css',
+						'assets/concat/style-open.txt',
 						'assets/css/index.css',
-						'assets/concat/style-close.css',
+						'assets/concat/style-close.txt',
 						'assets/barchart.html',
-						'assets/concat/script-open.css',
+						'assets/concat/script-open.txt',
 						'assets/js/index.min.js',
-						'assets/concat/script-close.css',
+						'assets/concat/script-close.txt',
 						],
 				dest: 'dist/index.html'
 			}
