@@ -48,14 +48,12 @@
 
 
 <style scoped>
-.outer-wrapper{background-color:#6495ed;width:630px;height:500px}
+.outer-wrapper{background-color:#6495ed;width:956px;height:500px}
 </style>
 <h1>Gender barchart for comment</h1>
-<p>Welcome to my barchart</p>
+<p>Now without browser-sync</p>
 
 <div class="outer-wrapper"></div>
-<script src='http://192.168.1.64:3000/socket.io/socket.io.js'></script>
-<script src='http://192.168.1.64:3001/browser-sync-client.min.js'></script>
 <script type="text/javascript">
 /*	News Section Colours */
 var colourPurple =	["#DABDD8","#95177E","#B570A7","#651E59","#461E47"];
@@ -73,7 +71,56 @@ var colourBorder =	["#999999","#E7E7E7","#C7C8CC","#B7B7B7","#D4D4D4","#CCCCCC",
 /*	Background Colours */
 var colourBackground =	["#006699","#2C2C2C","#E1E4E9","#ECECEC","#5E5E5E","#F9F9F9","#F0F1F3"];
 
-console.log("I think it's working");
+/*	==================================================================================== */
+/*	jQuery ready */
+
+(function() {
+		var init = function($)	
+		{
+
+		// setTimeout(function() {
+		// 	var content = document.getElementById('constrain-content'),
+		// 	nav = document.getElementById('extranav');
+		  
+		// 	if (content && nav) {
+		// 		nav.parentNode.removeChild(nav);
+		// 		content.className += ' single-column';
+		// 	} else {
+		// 		setTimeout(arguments.callee, 100);
+		// 	}
+		// }, 100);
+
+		var content = $('#constrain-content');
+		var nav = $('nav');
+
+		setTimeout(function () {
+			if (content && nav) {
+				console.log('We got content and nav!');
+				content.addClass('single-column');
+				nav.remove();
+			} else {
+				setTimeout(arguments.callee, 100);
+				console.log('We have not got content and nav!');
+			}
+		}, 100)
+
+		/* End of active code */
+		};		
+
+	setTimeout(function()
+	{
+	if (typeof jQuery !== 'undefined')
+	{
+		init(jQuery);
+
+
+	} else
+	{
+		setTimeout(arguments.callee, 60);
+	}
+	}, 60);
+
+})();
 </script>
 <!-- ========= PASTED POLOPOLY FOOTER BELOW ========= -->
 

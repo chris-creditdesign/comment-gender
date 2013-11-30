@@ -57,7 +57,7 @@ module.exports = function(grunt){
 						'assets/css/index.css',
 						'assets/concat/style-close.txt',
 						'assets/barchart.html',
-						'assets/concat/socket-io.txt',
+						// 'assets/concat/socket-io.txt',
 						'assets/concat/script-open.txt',
 						'assets/js/index.js',
 						'assets/concat/script-close.txt',
@@ -96,7 +96,7 @@ module.exports = function(grunt){
 		        tasks: ['buildcss','concat']
 		    },
 			uglify: {
-				files: ['assets/js/*.js'],
+				files: ['assets/js/index.js'],
 				tasks: ['uglify','concat']
 			},
 			concat: {
@@ -107,7 +107,10 @@ module.exports = function(grunt){
 
     });
 
-    grunt.registerTask('default', ['browser_sync', 'watch']);
+    grunt.registerTask('default', [
+    	// 'browser_sync', 
+    	'watch'
+    	]);
     // use build css for the final dist css
     grunt.registerTask('buildcss',  ['sass', 'cssc', 'cssmin']);
 

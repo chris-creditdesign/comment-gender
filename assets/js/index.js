@@ -14,4 +14,45 @@ var colourBorder =	["#999999","#E7E7E7","#C7C8CC","#B7B7B7","#D4D4D4","#CCCCCC",
 /*	Background Colours */
 var colourBackground =	["#006699","#2C2C2C","#E1E4E9","#ECECEC","#5E5E5E","#F9F9F9","#F0F1F3"];
 
-console.log("I think it's working");
+/*	==================================================================================== */
+/*	jQuery ready */
+
+(function() {
+		var init = function($)	
+		{
+
+		/*	==================================================================================== */
+		/*	Remove nav column and add class single-column to constrain-content column
+			so that it will be 956px wide. Bassed on Andrew code.
+			CHECK BEFORE USE!!!!! */
+		var content = $('#constrain-content');
+		var nav = $('#nav');
+
+		setTimeout(function () {
+			if (content && nav) {
+				console.log('We got content and nav!');
+				content.addClass('single-column');
+				nav.remove();
+			} else {
+				setTimeout(arguments.callee, 100);
+				console.log('We have not got content and nav!');
+			}
+		}, 100)
+
+		/* End of active code */
+		};		
+
+	setTimeout(function()
+	{
+	if (typeof jQuery !== 'undefined')
+	{
+		init(jQuery);
+
+
+	} else
+	{
+		setTimeout(arguments.callee, 60);
+	}
+	}, 60);
+
+})();
