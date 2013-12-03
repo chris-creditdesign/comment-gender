@@ -1,4 +1,42 @@
 <h1>Gender barchart for comment</h1>
-<p>Now without browser-sync</p>
+<p>Now with Ajax</p>
 
-<div class="outer-wrapper"></div>
+<p class="status-message"><em>The interactive companion to this table requires a modern browser (e.g. Chrome, Safari, Firefox or Internet Explorer 9+) with javascript enabled.</em></p>
+
+<div class="outer-wrapper">
+
+	<div class="count-chart">
+		<div class="tooltip hidden">
+			<p><span class="value"></span></p>
+		</div>
+	</div><!-- count-chart -->
+
+	<div class="wrapper field-wrapper">
+	<h2>Field</h2>
+		<form class="select-field">
+			<input type="radio" name="mode" id="TotalPaper" value="TotalPaper" checked><label for="TotalPaper">TotalPaper</label>
+			<input type="radio" name="mode" id="SingleF" value="SingleF"><label for="SingleF">SingleF</label>
+			<input type="radio" name="mode" id="SingleM" value="SingleM"><label for="SingleM">SingleM</label>
+			<input type="radio" name="mode" id="NatFirstF" value="NatFirstF"><label for="NatFirstF">NatFirstF</label>
+			<input type="radio" name="mode" id="NatFirstM" value="NatFirstM"><label for="NatFirstM">NatFirstM</label>
+			<input type="radio" name="mode" id="NatLastF" value="NatLastF"><label for="NatLastF">NatLastF</label>
+			<input type="radio" name="mode" id="NatLastM" value="NatLastM"><label for="NatLastM">NatLastM</label>
+			<input type="radio" name="mode" id="IntFirstF" value="IntFirstF"><label for="IntFirstF">IntFirstF</label>
+			<input type="radio" name="mode" id="IntFirstM" value="IntFirstM"><label for="IntFirstM">IntFirstM</label>
+			<input type="radio" name="mode" id="IntLastF" value="IntLastF"><label for="IntLastF">IntLastF</label>
+			<input type="radio" name="mode" id="IntLastM" value="IntLastM"><label for="IntLastM">IntLastM</label>
+			<input type="radio" name="mode" id="FMRatio" value="FMRatio"><label for="FMRatio">FMRatio</label>
+		</form>
+	</div><!--class="field-wrapper"-->
+
+	<div class="wrapper country-wrapper">
+		<h2>Continent</h2>
+		<form class="continent-select">
+		</form>
+
+		<h2>Country</h2>
+		<form class="country-select">
+		</form>
+	</div><!--wrapper country-wrapper-->
+
+</div> <!-- outer-wrapper -->
