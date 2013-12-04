@@ -101,6 +101,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 			return 0;
 		}
 
+		/* Add commas to numbers if needed */
+		var thousandFormat = d3.format(',');
+
 		/*	==================================================================================== */
 		/*	AJAX CALL. LOAD IN JSON AND CALL DRAW */
 
@@ -535,6 +538,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								
 								var country = d.country;
 								var choice = d.choice;
+
 								var x = d3.select(this).attr("x");
 								var y = d3.select(this).attr("y");
 
@@ -573,8 +577,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 								var country = d.country;
 
-								
-								
 								var choice = d.choice;
 								var x = d3.select(bars[0][i]).attr("x");
 								var y = d3.select(bars[0][i]).attr("y");
@@ -615,11 +617,18 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						/*	Create a var to hold the tooltip text string */
 						var tooltipText = "";
 						var countryString = country.replace(/_/g, ' ');
+						var formattedChoice;
+
+						if (field == "TotalPaper") {
+							formattedChoice = thousandFormat(choice);
+						} else {
+							formattedChoice = choice;
+						}
 
 						/* Update the tooltip text */
 						d3.select(".tooltip")
 							.select(".value")
-							.html(countryString + "<br /> " + choice);
+							.html(countryString + "<br /> " + formattedChoice);
 
 						var tooltipWidth = parseInt(($(".tooltip").css("width")), 10);
 						var tooltipHeight = parseInt($(".tooltip").css("height"), 10);
