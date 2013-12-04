@@ -64,6 +64,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 		/*	Global variable to hold the cc or ac choice */
 		var field = "TotalPaper";
+		var headerString = "Total papers published";
 
 		/*	Global Array to hold all the data we currently want to display */
 		var displayArray = [];
@@ -179,6 +180,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 					d3.selectAll(".select-field input").on("change", function(){
 						field = this.value;
 						updateDisplayArray();
+						updateHeader(field);
 					});
 
 					/*	Call updateDisplayArray() when one of the country checkboxes is clicked */
@@ -620,6 +622,50 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							.each("end", function() {
 								d3.select(".tooltip").classed("hidden", true);
 							});
+					}
+
+					function updateHeader (field) {
+
+						switch (field) {
+							case "TotalPaper" :
+								headerString = "Total papers published";
+								break;
+							case "SingleF" :
+								headerString = "Single female";
+								break;
+							case "SingleM" :
+								headerString = "Single male";
+								break;
+							case "NatFirstF" :
+								headerString = "National first female";
+								break;
+							case "NatFirstM" :
+								headerString = "National first male";
+								break;
+							case "NatLastF" :
+								headerString = "National last female";
+								break;
+							case "NatLastM" :
+								headerString = "National last male";
+								break;
+							case "IntFirstF" :
+								headerString = "International first female";
+								break;
+							case "IntFirstM" :
+								headerString = "International first male";
+								break;
+							case "IntLastF" :
+								headerString = "International last female";
+								break;
+							case "IntLastM" :
+								headerString = "International last male";
+								break;
+							case "FMRatio" :
+								headerString = "Female to male ratio";
+								break;
+						}
+
+						d3.select(".outer-wrapper h1").text(headerString);
 					}
 
 					/* An inital call of updateDisplayArray()  */

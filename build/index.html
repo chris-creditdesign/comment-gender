@@ -48,7 +48,7 @@
 
 
 <style scoped>
-.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outer-wrapper{width:630px;height:1000px;display:none}.outer-wrapper h1{text-transform:uppercase;font-size:1.1em;color:#666;letter-spacing:.1em;padding:0 0 2px 3px}.outer-wrapper .count-chart{position:relative;height:350px;width:940px}.outer-wrapper .count-chart .tooltip{position:absolute;padding:10px;background-color:#333;pointer-events:none;opacity:0;z-index:100;max-height:40px}.outer-wrapper .count-chart .tooltip p{margin:0;color:#ecf0f1;font-family:sans-serif;font-size:16px;line-height:20px}.outer-wrapper .count-chart .tooltip:before{content:"";position:absolute;bottom:-10px;left:49%;border-right:0;border-top:10px solid #333;border-bottom:0;border-left:10px solid transparent}.outer-wrapper .count-chart .tooltip.hidden{display:none}.outer-wrapper .count-chart .axis line,.outer-wrapper .count-chart .axis path{fill:none;stroke:#666;shape-rendering:crispEdges}.outer-wrapper .count-chart .axis text{font-family:sans-serif;fill:#666;font-size:13px;shape-rendering:crispEdges}.outer-wrapper .count-chart .x.axis text{font-size:13px}.outer-wrapper .count-chart rect{shape-rendering:crispEdges}.outer-wrapper .wrapper h2{text-transform:uppercase;font-size:1.1em;letter-spacing:.1em;text-align:center;color:#666;padding:10px 0 5px}.outer-wrapper .wrapper p{font-size:1.1em;line-height:1.4em;padding:10px 0 0;text-align:center;font-weight:400;color:#666}
+.status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outer-wrapper{width:630px;height:1000px;display:none}.outer-wrapper h1{text-transform:uppercase;font-size:1.1em;color:#666;letter-spacing:.1em;padding:0 0 0 3px;margin:0}.outer-wrapper .count-chart{position:relative;height:350px;width:940px}.outer-wrapper .count-chart .tooltip{position:absolute;padding:10px;background-color:#333;pointer-events:none;opacity:0;z-index:100;max-height:40px}.outer-wrapper .count-chart .tooltip p{margin:0;color:#ecf0f1;font-family:sans-serif;font-size:16px;line-height:20px}.outer-wrapper .count-chart .tooltip:before{content:"";position:absolute;bottom:-10px;left:49%;border-right:0;border-top:10px solid #333;border-bottom:0;border-left:10px solid transparent}.outer-wrapper .count-chart .tooltip.hidden{display:none}.outer-wrapper .count-chart .axis line,.outer-wrapper .count-chart .axis path{fill:none;stroke:#666;shape-rendering:crispEdges}.outer-wrapper .count-chart .axis text{font-family:sans-serif;fill:#666;font-size:13px;shape-rendering:crispEdges}.outer-wrapper .count-chart .x.axis text{font-size:13px}.outer-wrapper .count-chart rect{shape-rendering:crispEdges}.outer-wrapper .wrapper h2{text-transform:uppercase;font-size:1.1em;letter-spacing:.1em;text-align:center;color:#666;padding:10px 0 5px}.outer-wrapper .wrapper p{font-size:1.1em;line-height:1.4em;padding:10px 0 0;text-align:center;font-weight:400;color:#666}
 </style>
 <h1>Gender barchart for comment</h1>
 <p>Now with Ajax</p>
@@ -57,7 +57,7 @@
 
 <div class="outer-wrapper">
 	
-	<!-- <h1>Total papers published</h1> -->
+	<h1>Total papers published</h1>
 	<div class="count-chart">
 		<div class="tooltip hidden">
 			<p><span class="value"></span></p>
@@ -162,6 +162,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 		/*	Global variable to hold the cc or ac choice */
 		var field = "TotalPaper";
+		var headerString = "Total papers published";
 
 		/*	Global Array to hold all the data we currently want to display */
 		var displayArray = [];
@@ -277,6 +278,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 					d3.selectAll(".select-field input").on("change", function(){
 						field = this.value;
 						updateDisplayArray();
+						updateHeader(field);
 					});
 
 					/*	Call updateDisplayArray() when one of the country checkboxes is clicked */
@@ -718,6 +720,50 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							.each("end", function() {
 								d3.select(".tooltip").classed("hidden", true);
 							});
+					}
+
+					function updateHeader (field) {
+
+						switch (field) {
+							case "TotalPaper" :
+								headerString = "Total papers published";
+								break;
+							case "SingleF" :
+								headerString = "Single female";
+								break;
+							case "SingleM" :
+								headerString = "Single male";
+								break;
+							case "NatFirstF" :
+								headerString = "National first female";
+								break;
+							case "NatFirstM" :
+								headerString = "National first male";
+								break;
+							case "NatLastF" :
+								headerString = "National last female";
+								break;
+							case "NatLastM" :
+								headerString = "National last male";
+								break;
+							case "IntFirstF" :
+								headerString = "International first female";
+								break;
+							case "IntFirstM" :
+								headerString = "International first male";
+								break;
+							case "IntLastF" :
+								headerString = "International last female";
+								break;
+							case "IntLastM" :
+								headerString = "International last male";
+								break;
+							case "FMRatio" :
+								headerString = "Female to male ratio";
+								break;
+						}
+
+						d3.select(".outer-wrapper h1").text(headerString);
 					}
 
 					/* An inital call of updateDisplayArray()  */
