@@ -163,6 +163,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		/*	Global variable to hold the cc or ac choice */
 		var field = "TotalPaper";
 		var headerString = "Total papers published";
+		var axisString = "Papers published";
 
 		/*	Global Array to hold all the data we currently want to display */
 		var displayArray = [];
@@ -414,7 +415,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							});
 
 						updateBars();
-						// updateHeader();
+						updateHeader();
 						// setupLabel();
 					}
 
@@ -474,9 +475,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						.append("text")
 						.attr("transform", "rotate(-90)")
 						.attr("y", -margin.left)
-						.attr("x", -height/2)
+						.attr("x", -height)
 						.attr("dy", ".9em")
-						.style("text-anchor", "middle");
+						.style("text-anchor", "left");
 
 					var xScale = d3.scale.ordinal()
 						.domain(d3.range(dataset.length))
@@ -669,6 +670,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						text.on("mouseover", function(d, i) {
 
 								var country = d.country;
+
+								
+								
 								var choice = d.choice;
 								var x = d3.select(bars[0][i]).attr("x");
 								var y = d3.select(bars[0][i]).attr("y");
@@ -722,8 +726,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						var xPosition = parseInt(x, 10) - (tooltipWidth/2) + 65;
 						var yPosition = parseInt(y, 10) - (tooltipHeight) - 43;
 
-						console.log(tooltipWidth);
-
 						/* Update the tooltip position and value */
 						d3.select(".tooltip")
 							.style("left", xPosition + "px")
@@ -753,43 +755,58 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						switch (field) {
 							case "TotalPaper" :
 								headerString = "Total papers published";
+								axisString = "Papers published";
 								break;
 							case "SingleF" :
 								headerString = "Single female";
+								axisString = "Citations";
 								break;
 							case "SingleM" :
 								headerString = "Single male";
+								axisString = "Citations";
 								break;
 							case "NatFirstF" :
 								headerString = "National first female";
+								axisString = "Citations";
 								break;
 							case "NatFirstM" :
 								headerString = "National first male";
+								axisString = "Citations";
 								break;
 							case "NatLastF" :
 								headerString = "National last female";
+								axisString = "Citations";
 								break;
 							case "NatLastM" :
 								headerString = "National last male";
+								axisString = "Citations";
 								break;
 							case "IntFirstF" :
 								headerString = "International first female";
+								axisString = "Citations";
 								break;
 							case "IntFirstM" :
 								headerString = "International first male";
+								axisString = "Citations";
 								break;
 							case "IntLastF" :
 								headerString = "International last female";
+								axisString = "Citations";
 								break;
 							case "IntLastM" :
 								headerString = "International last male";
+								axisString = "Citations";
 								break;
 							case "FMRatio" :
 								headerString = "Female to male ratio";
+								axisString = "Female to male ratio";
 								break;
 						}
 
 						d3.select(".outer-wrapper h1").text(headerString);
+
+						d3.selectAll(".y .axisLabel text")
+							.text(axisString);
 					}
 
 					/* An inital call of updateDisplayArray()  */
