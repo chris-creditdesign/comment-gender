@@ -74,6 +74,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		var uniqueContinentArray = ["All"];
 
 		var totalBarArray = [];
+		var addingBars = true;
 
 		/*	Create SVG element */
 		var svg = d3.select(".count-chart")
@@ -387,12 +388,32 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						/*	Update the yScale domain the current highest value */
 						yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
 
+						/*	Make sure that the bars don't get too fat by keeping the xScale range above 5 */
+						if (displayArray.length > 5) {
+							xScale.domain(d3.range(displayArray.length));
+						} else {
+							xScale.domain(d3.range(5));
+						}
+
 						/*	Pass the new display array data to bars */
 						/*	Do I need this? */
 						var bars = blocks.selectAll("rect")
 								.data(displayArray, function(d, i) {
 									return d.country;
 								});
+
+
+						/*	Find out if bars are being taken away if so  addingBars = false; 
+							in order to alter the delay of the exiting bars	*/
+						totalBarArray.push(bars[0].length);
+
+						if ( totalBarArray.slice(-2)[1] >= totalBarArray.slice(-2)[0] ) {
+							addingBars = true;
+						} else {
+							addingBars = false;
+						}
+
+						totalBarArray.shift();
 
 						/* Enter… */
 						bars.enter()
@@ -424,13 +445,13 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						/*	Update… */
 						bars.transition()
 							.duration(duration)
-							/*.delay(function() {
+							.delay(function() {
 								if (!addingBars) {
-									return duration; 
+									return duration;
 								} else {
 									return 0;
 								}
-							})*/
+							})
 							.attr("x", function(d, i){
 								return xScale(i);
 							})
@@ -477,13 +498,13 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						/*	Update… */
 						text.transition()
 							.duration(duration)
-							/*.delay(function() {
+							.delay(function() {
 								if (!addingBars) {
-									return duration; 
+									return duration;
 								} else {
 									return 0;
 								}
-							})*/
+							})
 							.attr("x", function(d, i){
 								return xScale(i) + (xScale.rangeBand() / 2);
 							})
