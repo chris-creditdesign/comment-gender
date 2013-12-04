@@ -51,8 +51,8 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		/*	GLOBAL VARIABLES FOR D3 */
 
 		/*	Margin, Width and height */
-		var margin = {top: 30, right: 40, bottom: 15, left: 75};
-		var width = 940  - margin.left - margin.right;
+		var margin = {top: 30, right: 20, bottom: 15, left: 75};
+		var width = 630  - margin.left - margin.right;
 		var height = 350 - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
 		var duration = 450;
@@ -81,11 +81,13 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 				.attr("height", height + margin.top + margin.bottom);
 
 		/* Add a group for each row of bars */
-		var blocks = svg.append("g");
+		var blocks = svg.append("g")
+						.attr("transform", "translate(" + margin.left + ",0)");
 
 		/* Add a group for each row of text */
 		var groups = svg.append("g")
-			.attr("class", "x axis");
+						.attr("class", "x axis")
+						.attr("transform", "translate(" + margin.left + ",0)");
 
 		/*	Function to sort data.year200X by country name */
 		function compareCountry(a,b) {
@@ -129,8 +131,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 						dataset.push(newObject);
 					}
-
-					// console.table(dataset);
 
 					/* store this number to use to create a staggered transition */
 					var numberOfBars = dataset.length;
@@ -221,8 +221,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							checkArray[w].countryCode = dataset[w].countryCode;
 							checkArray[w].continent = dataset[w].continent;
 						}
-
-						console.table(checkArray);
 
 						switch (field) {
 							case "TotalPaper":
@@ -381,7 +379,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 					var xScale = d3.scale.ordinal()
 						.domain(d3.range(dataset.length))
-						.rangeRoundBands([margin.left,(width + margin.right)], 0.1);
+						.rangeRoundBands([0,(width + margin.right)], 0.1);
 
 					function updateBars () {
 						/*	Update the yScale domain the current highest value */
