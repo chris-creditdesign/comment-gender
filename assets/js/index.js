@@ -596,9 +596,14 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							.select(".value")
 							.html(countryString + "<br /> " + choice);
 
+						var tooltipWidth = parseInt(($(".tooltip").css("width")), 10);
+						var tooltipHeight = parseInt($(".tooltip").css("height"), 10);
+
 						/* Get this bar's x/y values, then augment for the tooltip */
-						var xPosition = parseInt(x) - (parseInt($(".tooltip").css("width"))/2, 10);
-						var yPosition = parseInt(y) - (parseInt($(".tooltip").css("height"), 10)) - 43;
+						var xPosition = parseInt(x, 10) - (tooltipWidth/2) + 65;
+						var yPosition = parseInt(y, 10) - (tooltipHeight) - 43;
+
+						console.log(tooltipWidth);
 
 						/* Update the tooltip position and value */
 						d3.select(".tooltip")
