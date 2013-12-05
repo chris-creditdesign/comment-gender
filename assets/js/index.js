@@ -1,20 +1,4 @@
-/*	News Section Colours */
-var colourPurple =	["#DABDD8","#95177E","#B570A7","#651E59","#461E47"];
-var colourYellow =	["#FED162","#F8B436","#F29500","#D37510","#AF6A17"];
-var colourRed =		["#EE8361","#EB6B4B","#E85338","#E53524","#A8131D"];
-var colourBlue =	["#84D0F0","#3BAADC","#006DB2","#2C3387","#152760"];
-var colourGreen =	["#E1DC00","#96BE17","#45A72C","#00892F","#00642D"];
-
-/*	Typography */
-var colourText =	["#363636","#707070","#006699","#5C7996","#222222","#EEEEEE","#F5821F","#C4C4C4"];
-
-/*	Border Colours */
-var colourBorder =	["#999999","#E7E7E7","#C7C8CC","#B7B7B7","#D4D4D4","#CCCCCC","#006699","#C4C4C4"];
-  
-/*	Background Colours */
-var colourBackground =	["#006699","#2C2C2C","#E1E4E9","#ECECEC","#5E5E5E","#F9F9F9","#F0F1F3"];
-
-/*	Colours for the bars */
+/*        Colours for the bars */
 var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 /*	==================================================================================== */
@@ -59,7 +43,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		/*	Array to hold the data ajaxed form the table */
 		var dataset = [];
 		var sortArray = [];
-		var yearArray = [];
 		var checkArray = [];
 
 		/*	Global variable to hold the cc or ac choice */
@@ -107,6 +90,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 		/* Add a group for each row of bars */
 		var blocks = svg.append("g")
+						.attr("transform", "translate(" + margin.left + ",0)");
+
+		var blocksFemale = svg.append("g")
 						.attr("transform", "translate(" + margin.left + ",0)");
 
 		/* Add a group for each row of text */
@@ -223,10 +209,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							displayArray.shift();
 							}
 
-						while (yearArray.length > 0) {
-							yearArray.shift();
-							}
-
 						while (checkArray.length > 0) {
 							checkArray.shift();
 							}
@@ -253,66 +235,54 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							case "TotalPaper":
 								for (var a = 0; a < checkArray.length; a++) {
 									checkArray[a].choice = dataset[a].TotalPaper;
+									checkArray[a].choiceFemale = 0;
 								}
 								break;
-							case "SingleF":
+							case "Single":
 								for (var b = 0; b < checkArray.length; b++) {
-									checkArray[b].choice = dataset[b].SingleF;
+									checkArray[b].choice = dataset[b].SingleM;
+									checkArray[b].choiceFemale = dataset[b].SingleF;
 								}
 								break;
-							case "SingleM":
-								for (var c = 0; c < checkArray.length; c++) {
-									checkArray[c].choice = dataset[c].SingleM;
-								}
-								break;
-							case "NatFirstF":
+
+							case "NatFirst":
 								for (var d = 0; d < checkArray.length; d++) {
-									checkArray[d].choice = dataset[d].NatFirstF;
+									checkArray[d].choice = dataset[d].NatFirstM;
+									checkArray[d].choiceFemale = dataset[d].NatFirstF;
 								}
 								break;
-							case "NatFirstM":
-								for (var e = 0; e < checkArray.length; e++) {
-									checkArray[e].choice = dataset[e].NatFirstM;
-								}
-							break;
-							case "NatLastF":
+
+							case "NatLast":
 								for (var f = 0; f < checkArray.length; f++) {
-									checkArray[f].choice = dataset[f].NatLastF;
+									checkArray[f].choice = dataset[f].NatLastM;
+									checkArray[f].choiceFemale = dataset[f].NatLastF;
 								}
 							break;
-							case "NatLastM":
-								for (var g = 0; g < checkArray.length; g++) {
-									checkArray[g].choice = dataset[g].NatLastM;
-								}
-							break;
-							case "IntFirstF":
+
+							case "IntFirst":
 								for (var h = 0; h < checkArray.length; h++) {
-									checkArray[h].choice = dataset[h].IntFirstF;
+									checkArray[h].choice = dataset[h].IntFirstM;
+									checkArray[h].choiceFemale = dataset[h].IntFirstF;
 								}
 							break;
-							case "IntFirstM":
-								for (var j = 0; j < checkArray.length; j++) {
-									checkArray[j].choice = dataset[j].IntFirstM;
-								}
-							break;
-							case "IntLastF":
+
+							case "IntLast":
 								for (var k = 0; k < checkArray.length; k++) {
-									checkArray[k].choice = dataset[k].IntLastF;
+									checkArray[k].choice = dataset[k].IntLastM;
+									checkArray[k].choiceFemale = dataset[k].IntLastF;
 								}
 							break;
-							case "IntLastM":
-								for (var l = 0; l < checkArray.length; l++) {
-									checkArray[l].choice = dataset[l].IntLastM;
-								}
-							break;
+
 							case "FMRatio":
 								for (var m = 0; m < checkArray.length; m++) {
 									checkArray[m].choice = dataset[m].FMRatio;
+									checkArray[m].choiceFemale = 0;
 								}
 							break;
 							default:
 								for (var n = 0; n < checkArray.length; n++) {
-									checkArray[n].choice = dataset[n].cc;
+									checkArray[n].choice = dataset[n].TotalPaper;
+									checkArray[n].choiceFemale = 0;
 								}
 						}
 
@@ -328,7 +298,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 						/*	Sort displayArray into the descending order 
 							If the contries happen to have the same value for choice then they are sorted into alphabetical order */
-						displayArray.sort(function(a, b) {
+						/* displayArray.sort(function(a, b) {
 								if (b.choice < a.choice) {
 									return -1;
 								}
@@ -337,7 +307,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								} else if (b.choice === a.choice) {
 									return a.country < b.country ? -1 : a.country > b.country ? 1 : 0;
 								}
-							});
+							});*/
+
+						console.table(displayArray);
 
 						updateBars();
 						updateHeader();
@@ -368,18 +340,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						updateDisplayArray();
 					}
 
-					/*	Set up bars - one for each country in the chosen year */
-					svg.selectAll("rect")
-								.data(dataset, function(d, i) {
-									return d.country;
-								})
-								.enter()
-								.append("rect")
-								.attr("width", 0)
-								.attr("x", 0)
-								.attr("height", 0)
-								.attr("y", 0);
-
 					/*	Define Y scale range to go from height to 0
 						Do not define the domaine yet */
 					var yScale = d3.scale.linear()
@@ -406,7 +366,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 					var xScale = d3.scale.ordinal()
 						.domain(d3.range(dataset.length))
-						.rangeRoundBands([0,(width + margin.right)], 0.1);
+						.rangeRoundBands([0,(width + margin.right)], 0.4);
 
 					function updateBars () {
 						/*	Update the yScale domain the current highest value */
@@ -420,8 +380,12 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						}
 
 						/*	Pass the new display array data to bars */
-						/*	Do I need this? */
 						var bars = blocks.selectAll("rect")
+								.data(displayArray, function(d, i) {
+									return d.country;
+								});
+
+						var barsFemale = blocksFemale.selectAll("rect")
 								.data(displayArray, function(d, i) {
 									return d.country;
 								});
@@ -445,10 +409,42 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							.attr("x", function(d, i){
 								return xScale(i);
 							})
-							.attr("width", xScale.rangeBand())
+							.attr("width", function() {
+								if (field == "TotalPaper" || field == "FMRatio") {
+									return xScale.rangeBand();
+								} else {
+									return xScale.rangeBand()/2;
+								}
+							})
 							.attr("y", height + margin.top)
 							.attr("height", 0 )
-							.attr("opacity",0.8)
+							.attr("opacity",0.6)
+							.attr("fill", function(d, i){
+								switch (d.continent) {
+									case "Australasia" :
+										return allBars[0];
+									case "North_America" :
+										return allBars[1];
+									case "Asia" :
+										return allBars[2];
+									case "Europe" :
+										return allBars[3];
+									case "South_America" :
+										return allBars[4];
+									default:
+										return allBars[0];
+								}
+							});
+
+						barsFemale.enter()
+							.append("rect")
+							.attr("x", function(d, i){
+								return xScale(i) + (xScale.rangeBand()/2);
+							})
+							.attr("width", xScale.rangeBand()/2)
+							.attr("y", height + margin.top)
+							.attr("height", 0 )
+							.attr("opacity",1)
 							.attr("fill", function(d, i){
 								switch (d.continent) {
 									case "Australasia" :
@@ -479,7 +475,13 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							.attr("x", function(d, i){
 								return xScale(i);
 							})
-							.attr("width", xScale.rangeBand())
+							.attr("width", function() {
+								if (field == "TotalPaper" || field == "FMRatio") {
+									return xScale.rangeBand();
+								} else {
+									return xScale.rangeBand()/2;
+								}
+							})
 							.attr("y", function(d){
 								return margin.top + yScale(d.choice);
 							})
@@ -487,8 +489,41 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								return height - yScale(d.choice);
 							});
 
+						barsFemale.transition()
+							.duration(duration)
+							.delay(function() {
+								if (!addingBars) {
+									return duration;
+								} else {
+									return 0;
+								}
+							})
+							.attr("x", function(d, i){
+								return xScale(i) + (xScale.rangeBand()/2);
+							})
+							.attr("width", xScale.rangeBand()/2)
+							.attr("y", function(d){
+								return margin.top + yScale(d.choiceFemale);
+							})
+							.attr("height", function(d){
+								return height - yScale(d.choiceFemale);
+							});
+
 						/*	Exit… */
 						bars.exit()
+							.transition()
+							.duration(duration)
+							.attr("x", function(d, i){
+								return d3.select(this).attr("x");
+							})
+							.attr("width", function(d, i){
+								return d3.select(this).attr("width");
+							})
+							.attr("y", height + margin.top)
+							.attr("height", 0 )
+							.remove();
+
+						barsFemale.exit()
 							.transition()
 							.duration(duration)
 							.attr("x", function(d, i){
@@ -533,7 +568,12 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								return xScale(i) + (xScale.rangeBand() / 2);
 							})
 							.attr("y", function(d){
-								return margin.top + yScale(d.choice) - 2;
+
+								if (d.choiceFemale >= d.choice ) {
+									return margin.top + yScale(d.choiceFemale) - 4;
+								} else {
+									return margin.top + yScale(d.choice) - 4;
+								}
 							});
 
 						/*	Exit… */
@@ -558,6 +598,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								
 								var country = d.country;
 								var choice = d.choice;
+								var choiceFemale = d.choiceFemale;
 
 								var x = d3.select(this).attr("x");
 								var y = d3.select(this).attr("y");
@@ -567,7 +608,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								d3.select(this)
 									.attr("fill","#f1c40f");
 
-								makeTooltip(country,choice,x,y);
+								makeTooltip(country,choice,choiceFemale,x,y);
 							})
 							.on("mouseout", function(d,i) {
 								/* Return the bar to it's continent colour */
@@ -581,7 +622,46 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 											return allBars[2];
 										case "Europe" :
 											return allBars[3];
-										case "SAmerica" :
+										case "South_America" :
+											return allBars[4];
+										default:
+											return allBars[0];
+									}
+								});
+
+								/* Hide the tooltip */
+								hideTooltip();
+							});
+
+						barsFemale.on("mouseover", function(d,i) {
+								
+								var country = d.country;
+								var choice = d.choice;
+								var choiceFemale = d.choiceFemale;
+
+								var x = d3.select(bars[0][i]).attr("x");
+								var y = d3.select(bars[0][i]).attr("y");
+
+								/*	Hover colour applied with javascript rather than CSS
+									so that it can be trigged by the text too */
+								d3.select(this)
+									.attr("fill","#f1c40f");
+
+								makeTooltip(country,choice,choiceFemale,x,y);
+							})
+							.on("mouseout", function(d,i) {
+								/* Return the bar to it's continent colour */
+								 d3.select(this).attr("fill", function(d, i){
+									switch (d.continent) {
+										case "Australasia" :
+											return allBars[0];
+										case "North_America" :
+											return allBars[1];
+										case "Asia" :
+											return allBars[2];
+										case "Europe" :
+											return allBars[3];
+										case "South_America" :
 											return allBars[4];
 										default:
 											return allBars[0];
@@ -593,18 +673,19 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							});
 
 						/* Add the mouseover behaviour to the text to increase the target area */
-						text.on("mouseover", function(d, i) {
+						text.on("mouseover", function(d,i) {
 
 								var country = d.country;
 
 								var choice = d.choice;
+								var choiceFemale = d.choiceFemale;
 								var x = d3.select(bars[0][i]).attr("x");
 								var y = d3.select(bars[0][i]).attr("y");
 
 								d3.select(bars[0][i])
 									.attr("fill","#f1c40f");
 
-								makeTooltip(country,choice,x,y);
+								makeTooltip(country,choice,choiceFemale,x,y);
 							})
 							.on("mouseout", function(d,i) {
 
@@ -618,7 +699,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 											return allBars[2];
 										case "Europe" :
 											return allBars[3];
-										case "SAmerica" :
+										case "South_America" :
 											return allBars[4];
 										default:
 											return allBars[0];
@@ -632,12 +713,13 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 					}
 
-					function makeTooltip(country,choice,x,y) {
+					function makeTooltip(country,choice,choiceFemale,x,y) {
 
 						/*	Create a var to hold the tooltip text string */
 						var tooltipText = "";
 						var countryString = country.replace(/_/g, ' ');
 						var formattedChoice;
+
 
 						if (field == "TotalPaper") {
 							formattedChoice = thousandFormat(choice);
@@ -645,10 +727,16 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							formattedChoice = choice;
 						}
 
+						if (field == "TotalPaper" || field == "FMRatio") {
+							tooltipText = countryString + "<br /> "+ formattedChoice;
+						} else {
+							tooltipText = countryString + "<br />Male: " + choice + "<br />Female: " + choiceFemale;
+						}
+
 						/* Update the tooltip text */
 						d3.select(".tooltip")
 							.select(".value")
-							.html(countryString + "<br /> " + formattedChoice);
+							.html(tooltipText);
 
 						var tooltipWidth = parseInt(($(".tooltip").css("width")), 10);
 						var tooltipHeight = parseInt($(".tooltip").css("height"), 10);
@@ -688,46 +776,31 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								headerString = "Total papers published";
 								axisString = "Papers published";
 								break;
-							case "SingleF" :
-								headerString = "Single female";
+							case "Single" :
+								headerString = "Single";
 								axisString = "Citations";
 								break;
-							case "SingleM" :
-								headerString = "Single male";
+
+							case "NatFirst" :
+								headerString = "National first";
 								axisString = "Citations";
 								break;
-							case "NatFirstF" :
-								headerString = "National first female";
+
+							case "NatLast" :
+								headerString = "National last";
 								axisString = "Citations";
 								break;
-							case "NatFirstM" :
-								headerString = "National first male";
+
+							case "IntFirst" :
+								headerString = "International first";
 								axisString = "Citations";
 								break;
-							case "NatLastF" :
-								headerString = "National last female";
+
+							case "IntLast" :
+								headerString = "International last";
 								axisString = "Citations";
 								break;
-							case "NatLastM" :
-								headerString = "National last male";
-								axisString = "Citations";
-								break;
-							case "IntFirstF" :
-								headerString = "International first female";
-								axisString = "Citations";
-								break;
-							case "IntFirstM" :
-								headerString = "International first male";
-								axisString = "Citations";
-								break;
-							case "IntLastF" :
-								headerString = "International last female";
-								axisString = "Citations";
-								break;
-							case "IntLastM" :
-								headerString = "International last male";
-								axisString = "Citations";
-								break;
+
 							case "FMRatio" :
 								headerString = "Female to male ratio";
 								axisString = "Female to male ratio";
