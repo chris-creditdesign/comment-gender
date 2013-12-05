@@ -143,7 +143,7 @@ $colour-5: #34495e;
 				@include transition(color, $duration);
 				&:hover {
 					color: #A0BEC5;
-				}
+				} // hover
 	
 				input {
 					outline: none !important;
@@ -160,7 +160,7 @@ $colour-5: #34495e;
 					left: 0;
 					opacity: 1;
 					position: absolute;
-					top: -3px;
+					top: 2px;
 					width: 20px;
 					-webkit-backface-visibility: hidden; 
 				} // span
@@ -198,9 +198,6 @@ $colour-5: #34495e;
 						} // .icon
 					} // .checked
 				} // .checkbox
-
-
-
 
 			} // label
 

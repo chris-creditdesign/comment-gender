@@ -81,16 +81,21 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		function setupLabel() {
 			var checkBox = ".checkbox";
 			var checkBoxInput = checkBox + " input[type='checkbox']";
+			var radioInput = checkBox + " input[type='radio']";
 			var checkBoxChecked = "checked";
 
-			if ($(checkBoxInput).length) {
-				$(checkBox).each(function(){
-					$(this).removeClass(checkBoxChecked);
-				});
-				$(checkBoxInput + ":checked").each(function(){
-					$(this).parent(checkBox).addClass(checkBoxChecked);
-				});
-			}
+			
+			$(checkBox).each(function(){
+				$(this).removeClass(checkBoxChecked);
+			});
+			$(checkBoxInput + ":checked").each(function(){
+				$(this).parent(checkBox).addClass(checkBoxChecked);
+			});
+			$(radioInput + ":checked").each(function(){
+				$(this).parent(checkBox).addClass(checkBoxChecked);
+			});
+			
+
 		}
 
 
@@ -179,7 +184,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						.attr("class", "checkbox")
 						.html(function (d) {
 							var continentString = d.replace(/_/g, ' ');
-							return "<span class='icon'>	<svg height='20' width='20'><circle cx='10' cy='10' r='10' class='dots " + d +  "'></circle><polygon fill='#ECF0F1' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></svg></span><input type='checkbox' value='" + d + "' data-continent='" + d + "' checked>" + continentString;
+							return "<span class='icon'>	<svg height='20' width='20'><circle cx='10' cy='10' r='10' class='dots " + d +  "'></circle><polygon fill='#ECF0F1' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span><input type='checkbox' value='" + d + "' data-continent='" + d + "' checked>" + continentString;
 						});
 
 					/* Create checkboxes for each country inside the country-select form */
@@ -192,7 +197,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 						.attr("class", "checkbox")
 						.html(function (d) {
 							var countryString = d.country.replace(/_/g, ' ');
-							return "<span class='icon'>	<svg height='20' width='20'><circle cx='10' cy='10' r='10' class='dots'></circle><polygon fill='#ECF0F1' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></svg></span><input type='checkbox' value='" + d.country + "' data-continent='" + d.continent + "' checked>" + countryString + " (" + d.countryCode + ")";
+							return "<span class='icon'>	<svg height='20' width='20'><circle cx='10' cy='10' r='10' class='dots'></circle><polygon fill='#ECF0F1' points='8.163,11.837 6.062,9.737 3.963,11.837 6.062,13.938 8.163,16.037 16.037,8.162 13.938,6.062'/></polygon></svg></span><input type='checkbox' value='" + d.country + "' data-continent='" + d.continent + "' checked>" + countryString + " (" + d.countryCode + ")";
 						});
 
 					/*	When a field button is clicked update the field variable to represent the selected 
