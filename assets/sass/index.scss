@@ -1,3 +1,19 @@
+@mixin transition($property, $duration) {
+    -webkit-transition: $property $duration linear;
+    -moz-transition: $property $duration linear;
+    -ms-transition: $property $duration linear;
+    -o-transition: $property $duration linear;
+    transition: $property $duration linear;
+}
+
+$duration: 250ms;
+
+$colour-1: #1abc9c;
+$colour-2: #27ae60;
+$colour-3: #3498db;
+$colour-4: #5959b7;
+$colour-5: #34495e;
+
 .status-message {
 	border: 1px solid #c00;
 	background: #fac7c7;
@@ -87,7 +103,14 @@
 	} // count-chart
 
 
+	/* Check boxes
+	----------------------------------*/
 	.wrapper {
+		width: 630px;
+		padding: 0 0 0 10px;
+		float: left;
+		clear: left;
+
 		h2 {
 			text-transform: uppercase;
 			font-size: 1.1em;
@@ -106,116 +129,90 @@
 			font-weight: normal;
 			color: #666;
 		}
+
+		form {
+			label {
+				float: left; 
+				width: 115px; 
+				margin: 0 10px 6px 0;
+				padding: 0 0 0 30px;
+				position: relative;
+				-webkit-backface-visibility: hidden; 
+				display: block;
+				cursor: pointer;
+				@include transition(color, $duration);
+				&:hover {
+					color: #A0BEC5;
+				}
+	
+				input {
+					outline: none !important;
+					opacity: 0;
+					filter: alpha(opacity=0);
+					zoom: 1;
+					float: left;
+					margin-left: -40px;
+				} // input
+
+				span {
+					display: block;
+					height: 20px;
+					left: 0;
+					opacity: 1;
+					position: absolute;
+					top: -3px;
+					width: 20px;
+					-webkit-backface-visibility: hidden; 
+				} // span
+
+				&.checkbox {
+					fill: #ecf0f1;
+
+					&.checked {
+						.icon {
+							.dots{
+								fill: #A0BEC5;
+								opacity: 0.8;
+								@include transition(fill, $duration);
+								&.Australasia {
+									fill: $colour-1;
+								}
+
+								&.North_America {
+									fill: $colour-2;
+								}
+
+								&.Asia {
+									fill: $colour-3;
+								}
+
+								&.Europe {
+									fill: $colour-4;
+								}	
+
+								&.South_America {
+									fill: $colour-5;
+								}
+								
+							} // .dots
+						} // .icon
+					} // .checked
+				} // .checkbox
+
+
+
+
+			} // label
+
+		} // form
+		
+		/* Make the field labels a bit wider */
+		form.field-select label {
+			width: 170px;
+		}
+
 	} // wrapper
 
-	/* Check boxes
-	----------------------------------*/
-
-	/* COUNTRY */
-	.wrapper,
-	.country-wrapper {
-		width: 630px;
-		padding: 0 0 0 10px;
-		float: left;
-		clear: left;
-	}
 	
-	form.field-select,
-	form.country-select,
-	form.continent-select {
-		float: left;
-		// margin: 5px 0 10px 10px;
-	}
-	
-	form.field-select label,
-	form.country-select label,
-	form.continent-select label {
-		float: left; 
-		width: 115px; 
-		margin: 0 10px 0 0;
-		display: block;
-		cursor: pointer; 
-	}
-
-	form.field-select label {
-		width: 170px;
-	}
-
-	form.field-select label,
-	form.country-select label.checkbox,
-	form.continent-select label.checkbox {
-		margin-bottom: 6px;
-		padding-left: 30px;
-		position: relative;
-		-webkit-transition: 0.25s;
-		-moz-transition: 0.25s;
-		-o-transition: 0.25s;
-		transition: 0.25s;
-		-webkit-backface-visibility: hidden; 
-	}
-	
-	form.field-select label:hover,
-	label.checkbox:hover {
-		color: #A0BEC5; 
-	}
-	
-	form.field-select input[type="radio"],
-	label.checkbox input[type="checkbox"] {
-		outline: none !important;
-		opacity: 0;
-		filter: alpha(opacity=0);
-		zoom: 1;
-		float: left;
-		margin-left: -40px;
-	}
-	
-	form.field-select label span,
-	label.checkbox .icon {
-		display: block;
-		height: 20px;
-		left: 0;
-		opacity: 1;
-		position: absolute;
-		top: -3px;
-		width: 20px;
-		-webkit-transition: opacity 0.1s linear;
-		-moz-transition: opacity 0.1s linear;
-		-o-transition: opacity 0.1s linear;
-		transition: opacity 0.1s linear;
-		-webkit-backface-visibility: hidden; 
-	}
-	
-	label.checkbox.checked .icon .dots {
-		fill: #A0BEC5;
-	}
-
-	label.checkbox.checked .icon .dots.Australasia {
-		fill: #1abc9c;
-		opacity: 0.8;
-	}
-
-	label.checkbox.checked .icon .dots.North_America {
-		fill: #27ae60;
-		opacity: 0.8;
-	}
-
-	label.checkbox.checked .icon .dots.Asia {
-		fill: #3498db;
-		opacity: 0.8;
-	}
-
-	label.checkbox.checked .icon .dots.Europe {
-		fill: #5959b7;
-		opacity: 0.8;
-	}	
-
-	label.checkbox.checked .icon .dots.South_America {
-		fill: #34495e;
-		opacity: 0.8;
-	}
-
-	label.checkbox .icon .dots {
-		fill: #ecf0f1;
-	}
 
 } // outer-wrapper
