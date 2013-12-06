@@ -592,14 +592,21 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 						/*	Extract the info needed to build the tooltip
 							and send it to the makeTooltip function */
-						bars.on("mouseover", function(d) {
+						bars.on("mouseover", function(d,i) {
 								
 								var country = d.country;
 								var choice = d.choice;
 								var choiceFemale = d.choiceFemale;
 
 								var x = d3.select(this).attr("x");
-								var y = d3.select(this).attr("y");
+								var y;
+
+								if (d.choiceFemale >= d.choice ) {
+									y = d3.select(barsFemale[0][i]).attr("y");
+								} else {
+									y = d3.select(bars[0][i]).attr("y");
+								}
+
 
 								/*	Hover colour applied with javascript rather than CSS
 									so that it can be trigged by the text too */
@@ -638,7 +645,14 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								var choiceFemale = d.choiceFemale;
 
 								var x = d3.select(bars[0][i]).attr("x");
-								var y = d3.select(bars[0][i]).attr("y");
+								var y;
+
+								if (d.choiceFemale >= d.choice ) {
+									y = d3.select(barsFemale[0][i]).attr("y");
+								} else {
+									y = d3.select(bars[0][i]).attr("y");
+								}
+
 
 								/*	Hover colour applied with javascript rather than CSS
 									so that it can be trigged by the text too */
@@ -677,8 +691,15 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 
 								var choice = d.choice;
 								var choiceFemale = d.choiceFemale;
+
 								var x = d3.select(bars[0][i]).attr("x");
-								var y = d3.select(bars[0][i]).attr("y");
+								var y;
+
+								if (d.choiceFemale >= d.choice ) {
+									y = d3.select(barsFemale[0][i]).attr("y");
+								} else {
+									y = d3.select(bars[0][i]).attr("y");
+								}
 
 								d3.select(bars[0][i])
 									.attr("fill","#f1c40f");
