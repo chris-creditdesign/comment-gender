@@ -309,8 +309,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								}
 							});*/
 
-						console.table(displayArray);
-
 						updateBars();
 						updateHeader();
 						setupLabel();
