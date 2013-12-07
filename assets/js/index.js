@@ -650,11 +650,31 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 								d3.select(this)
 									.attr("fill","#f1c40f");
 
+								d3.select(barsFemale[0][i])
+									.attr("fill","#f1c40f");
+
 								makeTooltip(country,choice,choiceFemale,x,y);
 							})
 							.on("mouseout", function(d,i) {
 								/* Return the bar to it's continent colour */
 								d3.select(this).attr("fill", function(d, i){
+									switch (d.continent) {
+										case "Australasia" :
+											return allBars[0];
+										case "North_America" :
+											return allBars[1];
+										case "Asia" :
+											return allBars[2];
+										case "Europe" :
+											return allBars[3];
+										case "South_America" :
+											return allBars[4];
+										default:
+											return allBars[0];
+									}
+								});
+
+								d3.select(barsFemale[0][i]).attr("fill", function(d, i){
 									switch (d.continent) {
 										case "Australasia" :
 											return allBars[0];
@@ -693,6 +713,9 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 								/*	Hover colour applied with javascript rather than CSS
 									so that it can be trigged by the text too */
+								d3.select(bars[0][i])
+									.attr("fill","#f1c40f");
+
 								d3.select(this)
 									.attr("fill","#f1c40f");
 
@@ -700,7 +723,24 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 							})
 							.on("mouseout", function(d,i) {
 								/* Return the bar to it's continent colour */
-								 d3.select(this).attr("fill", function(d, i){
+								d3.select(bars[0][i]).attr("fill", function(d, i){
+									switch (d.continent) {
+										case "Australasia" :
+											return allBars[0];
+										case "North_America" :
+											return allBars[1];
+										case "Asia" :
+											return allBars[2];
+										case "Europe" :
+											return allBars[3];
+										case "South_America" :
+											return allBars[4];
+										default:
+											return allBars[0];
+									}
+								});
+
+								d3.select(this).attr("fill", function(d, i){
 									switch (d.continent) {
 										case "Australasia" :
 											return allBars[0];
@@ -741,11 +781,31 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 								d3.select(bars[0][i])
 									.attr("fill","#f1c40f");
 
+								d3.select(barsFemale[0][i])
+									.attr("fill","#f1c40f");
+
 								makeTooltip(country,choice,choiceFemale,x,y);
 							})
 							.on("mouseout", function(d,i) {
 
 								d3.select(bars[0][i]).attr("fill", function(d, i){
+									switch (d.continent) {
+										case "Australasia" :
+											return allBars[0];
+										case "North_America" :
+											return allBars[1];
+										case "Asia" :
+											return allBars[2];
+										case "Europe" :
+											return allBars[3];
+										case "South_America" :
+											return allBars[4];
+										default:
+											return allBars[0];
+									}
+								});
+
+								d3.select(barsFemale[0][i]).attr("fill", function(d, i){
 									switch (d.continent) {
 										case "Australasia" :
 											return allBars[0];
