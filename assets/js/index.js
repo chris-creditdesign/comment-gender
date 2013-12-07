@@ -1,5 +1,6 @@
 /*        Colours for the bars */
-var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
+// var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
+var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 /*	==================================================================================== */
 /*	JQUERY READY */
@@ -35,7 +36,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		/*	GLOBAL VARIABLES FOR D3 */
 
 		/*	Margin, Width and height */
-		var margin = {top: 30, right: 20, bottom: 15, left: 75};
+		var margin = {top: 15, right: 20, bottom: 20, left: 75};
 		var width = 630  - margin.left - margin.right;
 		var height = 350 - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
@@ -99,6 +100,42 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 		var groups = svg.append("g")
 						.attr("class", "x axis")
 						.attr("transform", "translate(" + margin.left + ",0)");
+
+		/* Add the male female key */
+		var key = svg.append("g")
+						.attr("class","axis")
+						.attr("transform", "translate(-49,0)")
+						.attr("opacity", 0);
+
+		key.append("rect")
+			.attr("x", width + margin.left -50)
+			.attr("y", (height + margin.top + margin.bottom - 10) )
+			.attr('width',"10")
+			.attr("height", "10")
+			.attr("opacity", 0.6)
+			.attr("fill", "#34495e")
+			.attr("stroke","none");
+
+		key.append("text")
+			.attr("x", width + margin.left -35)
+			.attr("y", (height + margin.top + margin.bottom) )
+			.style("text-anchor", "right")
+			.text("Male");
+
+		key.append("rect")
+			.attr("x", width + margin.left)
+			.attr("y", (height + margin.top + margin.bottom - 10) )
+			.attr('width',"10")
+			.attr("height", "10")
+			.attr("fill", "#34495e")
+			.attr("stroke","none");
+
+		key.append("text")
+			.attr("x", width + margin.left + 15)
+			.attr("y", (height + margin.top + margin.bottom) )
+			.style("text-anchor", "left")
+			.text("Female");
+
 
 		/*	Function to sort data.year200X by country name */
 		function compareCountry(a,b) {
@@ -307,7 +344,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 								} else if (b.choice === a.choice) {
 									return a.country < b.country ? -1 : a.country > b.country ? 1 : 0;
 								}
-							});*/
+							}); */
 
 						updateBars();
 						updateHeader();
@@ -794,35 +831,56 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
 							case "TotalPaper" :
 								headerString = "Total papers published";
 								axisString = "Papers published";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 0);
 								break;
 							case "Single" :
 								headerString = "Single";
 								axisString = "Citations";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 1);
 								break;
 
 							case "NatFirst" :
 								headerString = "National first";
 								axisString = "Citations";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 1);
 								break;
 
 							case "NatLast" :
 								headerString = "National last";
 								axisString = "Citations";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 1);
 								break;
 
 							case "IntFirst" :
 								headerString = "International first";
 								axisString = "Citations";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 1);
 								break;
 
 							case "IntLast" :
 								headerString = "International last";
 								axisString = "Citations";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 1);
 								break;
 
 							case "FMRatio" :
 								headerString = "Female to male ratio";
 								axisString = "Female to male ratio";
+								key.transition()
+									.duration(duration)
+									.attr('opacity', 0);
 								break;
 						}
 
