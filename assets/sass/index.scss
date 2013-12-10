@@ -37,9 +37,9 @@ $colour-5: #EB6B4B;
 		height: 350px;
 		width: 630px;
 		
-		/* Tooltip
+		/* infobox
 		----------------------------------*/
-		.tooltip {
+		.infobox {
 			position: absolute;
 			padding: 10px;
 			background-color: #333;
@@ -53,9 +53,9 @@ $colour-5: #EB6B4B;
 				font-size: 16px;
 				line-height: 20px;
 			} 
-		} // tooltip
+		} // infobox
 
-		.tooltip:before {
+		.infobox:before {
 			content: "";
 			position:absolute;
 			bottom: -10px;
@@ -66,7 +66,7 @@ $colour-5: #EB6B4B;
 			border-left: 10px solid transparent;
 		}
 
-		.tooltip.hidden {
+		.infobox.hidden {
 			display: none;
 		}
 

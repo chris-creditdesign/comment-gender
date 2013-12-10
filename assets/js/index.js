@@ -139,6 +139,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 		/*	We now want to load in the data from our html table */
 
 		$.ajax({
+			// url: "data/citation-data.html",
 			url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
 				dataType: 'text',
 				success: function (data) {
@@ -834,24 +835,24 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 						}
 
 						/* Update the tooltip text */
-						d3.select(".tooltip")
+						d3.select(".infobox")
 							.select(".value")
 							.html(tooltipText);
 
-						var tooltipWidth = parseInt(($(".tooltip").css("width")), 10);
-						var tooltipHeight = parseInt($(".tooltip").css("height"), 10);
+						var tooltipWidth = parseInt(($(".infobox").css("width")), 10);
+						var tooltipHeight = parseInt($(".infobox").css("height"), 10);
 
 						/* Get this bar's x/y values, then augment for the tooltip */
 						var xPosition = parseInt(x, 10) - (tooltipWidth/2) + 65;
 						var yPosition = parseInt(y, 10) - (tooltipHeight) - 43;
 
 						/* Update the tooltip position and value */
-						d3.select(".tooltip")
+						d3.select(".infobox")
 							.style("left", xPosition + "px")
 							.style("top", yPosition + "px");
 
 						/* Show the tooltip */
-						d3.select(".tooltip")
+						d3.select(".infobox")
 							.classed("hidden", false)
 							.transition()
 							.duration(duration/2)
@@ -860,12 +861,12 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 					}
 
 					function hideTooltip() {
-						d3.select(".tooltip")
+						d3.select(".infobox")
 							.transition()
 							.duration(duration/2)
 							.style("opacity", 0)
 							.each("end", function() {
-								d3.select(".tooltip").classed("hidden", true);
+								d3.select(".infobox").classed("hidden", true);
 							});
 					}
 
