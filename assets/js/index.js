@@ -16,6 +16,14 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 		$(".outer-wrapper").css({"display":"block"});
 		$(".status-message").css({"display":"none"});
 
+		/* Hides the table and shows the SVG if javascript is enabled */
+
+		// $("h2:contains('####')").parent("section").parent("div").css({"display":"none"});
+		// $("h2:contains('####') + table").css({"width":"630px"});
+		// $(".outerwrapper p.timeline-standfirst").text(standfirst);
+		// $(".outerwrapper span.timeline-heading").text(headline);
+		// $(".outerwrapper").css({"display":"block"});
+
 		/*	==================================================================================== */
 		/*	GLOBAL VARIABLES FOR D3 */
 
@@ -147,6 +155,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 			$.ajax({
 				// url: "data/citation-data.html",
 				url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
+				// url: "http://www.nature.com/news/7.14179",
 					dataType: 'text',
 					success: function (data) {
 						/*	Store each row of the table in a var */
@@ -396,7 +405,24 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 						function updateBars () {
 							/*	Update the yScale domain the current highest value */
-							yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+							/*	or a constant value for the ratios */
+
+							switch (field) {
+								case "TotalPaper" :
+								case "FMRatio" :
+									yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+									break;
+								case "Single" :
+								case "NatFirst" :
+								case "NatLast" :
+								case "IntFirst" :
+								case "IntLast" :
+									yScale.domain([0, 1.7]);
+									break;
+								default:
+									yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+									break;
+							}
 
 							/*	Make sure that the bars don't get too fat by keeping the xScale range above 5 */
 							if (displayArray.length > 5) {
@@ -887,52 +913,60 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 										.attr('opacity', 0);
 									break;
 								case "Single" :
-									headerString = "Single";
-									axisString = "Citations";
+									headerString = "Single author";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "NatFirst" :
-									headerString = "National first";
-									axisString = "Citations";
+									headerString = "First author (national collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "NatLast" :
-									headerString = "National last";
-									axisString = "Citations";
+									headerString = "Last author (national collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "IntFirst" :
-									headerString = "International first";
-									axisString = "Citations";
+									headerString = "First author (international collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "IntLast" :
-									headerString = "International last";
-									axisString = "Citations";
+									headerString = "Last author (international collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "FMRatio" :
-									headerString = "Female to male ratio";
-									axisString = "Female to male ratio";
+									headerString = "Ratio of female to male authorships";
+									axisString = "Ratio of female to male authorships";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 0);
 									break;
+								default:
+									headerString = "Total papers published";
+									axisString = "Papers published";
+									key.transition()
+										.duration(duration)
+										.attr('opacity', 0);
+									break;
+
 							}
 
 							d3.select(".outer-wrapper h1").text(headerString);

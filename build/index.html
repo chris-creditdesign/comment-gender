@@ -51,7 +51,7 @@
 .status-message{border:1px solid #c00;background:#fac7c7;padding:10px}.outer-wrapper{width:755px;height:920px;display:none}.outer-wrapper h1{font-size:1.1em;letter-spacing:.1em;padding:0 0 0 3px;margin:0}.outer-wrapper .count-chart{position:relative;height:350px;width:630px}.outer-wrapper .count-chart .infobox{position:absolute;padding:10px;background-color:#333;pointer-events:none;opacity:0;z-index:100}.outer-wrapper .count-chart .infobox p{margin:0;color:#ecf0f1;font-family:sans-serif;font-size:16px;line-height:20px}.outer-wrapper .count-chart .infobox:before{content:"";position:absolute;bottom:-10px;left:49%;border-right:0;border-top:10px solid #333;border-bottom:0;border-left:10px solid transparent}.outer-wrapper .count-chart .infobox.hidden{display:none}.outer-wrapper .count-chart .axis line,.outer-wrapper .count-chart .axis path{fill:none;stroke:#666;shape-rendering:crispEdges}.outer-wrapper .count-chart .axis text{font-family:sans-serif;fill:#666;font-size:13px;shape-rendering:crispEdges}.outer-wrapper .count-chart .x.axis text{font-size:12px;cursor:default}.outer-wrapper .count-chart rect{shape-rendering:crispEdges;-webkit-transition:fill 125ms linear;-moz-transition:fill 125ms linear;-ms-transition:fill 125ms linear;-o-transition:fill 125ms linear;transition:fill 125ms linear}.outer-wrapper .wrapper{width:630px;padding:0 0 0 10px;float:left;clear:left}.outer-wrapper .wrapper h2{text-transform:uppercase;font-size:1.1em;letter-spacing:.1em;text-align:center;color:#666;padding:10px 0 5px;margin:0 0 5px}.outer-wrapper .wrapper p{font-size:1.1em;line-height:1.4em;padding:10px 0 0;text-align:center;font-weight:400;color:#666}.outer-wrapper .wrapper form label{float:left;width:115px;margin:0 10px 6px 0;padding:0 0 0 30px;position:relative;-webkit-backface-visibility:hidden;display:block;cursor:pointer;-webkit-transition:color 250ms linear;-moz-transition:color 250ms linear;-ms-transition:color 250ms linear;-o-transition:color 250ms linear;transition:color 250ms linear}.outer-wrapper .wrapper form label:hover{color:#a0bec5}.outer-wrapper .wrapper form label input{outline:0!important;opacity:0;filter:alpha(opacity=0);zoom:1;float:left;margin-left:-40px}.outer-wrapper .wrapper form label span{display:block;height:20px;left:0;opacity:1;position:absolute;top:2px;width:20px;-webkit-backface-visibility:hidden}.outer-wrapper .wrapper form label.checkbox{fill:#ecf0f1}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots{fill:#a0bec5;opacity:.8;-webkit-transition:fill 250ms linear;-moz-transition:fill 250ms linear;-ms-transition:fill 250ms linear;-o-transition:fill 250ms linear;transition:fill 250ms linear}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots.Australasia{fill:#1abc9c}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots.North_America{fill:#27ae60}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots.Asia{fill:#3498db}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots.Europe{fill:#5959b7}.outer-wrapper .wrapper form label.checkbox.checked .icon .dots.South_America{fill:#eb6b4b}.outer-wrapper .wrapper form.field-select label{width:170px}
 </style>
 <h1>Gender barchart for comment</h1>
-<p>Introduction</p>
+<p>Scientists in these 30 countries contributed the largest shares of the more than 5 million papers published between 2008 and 2012. Explore below to discover what proportion of output was contributed by women and men, and how the gender of lead authors changed citation rates on papers from national and international collaborations.</p>
 
 <p class="status-message"><em>The interactive companion to this table requires a modern browser (e.g. Chrome, Safari, Firefox or Internet Explorer 9+) with javascript enabled.</em></p>
 
@@ -106,7 +106,7 @@
 					</svg>
 				</span>	
 				<input type="radio" name="mode" id="NatFirst" value="NatFirst">
-				National first author
+				First author (national collaboration)
 			</label>
 			<label class="checkbox" for="NatLast">
 				<span class='icon'>
@@ -116,7 +116,7 @@
 					</svg>
 				</span>	
 				<input type="radio" name="mode" id="NatLast" value="NatLast">
-				National last author
+				Last author (national collaboration)
 			</label>
 			<label class="checkbox" for="IntFirst">
 				<span class='icon'>
@@ -126,7 +126,7 @@
 					</svg>
 				</span>	
 				<input type="radio" name="mode" id="IntFirst" value="IntFirst">
-				International first author
+				First author (international collaboration)
 			</label>
 			<label class="checkbox" for="IntLast">
 				<span class='icon'>
@@ -136,7 +136,7 @@
 					</svg>
 				</span>	
 				<input type="radio" name="mode" id="IntLast" value="IntLast">
-				International last author
+				Last author (international collaboration)
 			</label>
 		</form>
 	</div><!--class="field-wrapper"-->
@@ -173,6 +173,14 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 			so hide the error message and show outer-wrapper */
 		$(".outer-wrapper").css({"display":"block"});
 		$(".status-message").css({"display":"none"});
+
+		/* Hides the table and shows the SVG if javascript is enabled */
+
+		// $("h2:contains('####')").parent("section").parent("div").css({"display":"none"});
+		// $("h2:contains('####') + table").css({"width":"630px"});
+		// $(".outerwrapper p.timeline-standfirst").text(standfirst);
+		// $(".outerwrapper span.timeline-heading").text(headline);
+		// $(".outerwrapper").css({"display":"block"});
 
 		/*	==================================================================================== */
 		/*	GLOBAL VARIABLES FOR D3 */
@@ -305,6 +313,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 			$.ajax({
 				// url: "data/citation-data.html",
 				url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
+				// url: "http://www.nature.com/news/7.14179",
 					dataType: 'text',
 					success: function (data) {
 						/*	Store each row of the table in a var */
@@ -554,7 +563,24 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 						function updateBars () {
 							/*	Update the yScale domain the current highest value */
-							yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+							/*	or a constant value for the ratios */
+
+							switch (field) {
+								case "TotalPaper" :
+								case "FMRatio" :
+									yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+									break;
+								case "Single" :
+								case "NatFirst" :
+								case "NatLast" :
+								case "IntFirst" :
+								case "IntLast" :
+									yScale.domain([0, 1.7]);
+									break;
+								default:
+									yScale.domain([0, d3.max(displayArray, function(d) { return d.choice;} )]);
+									break;
+							}
 
 							/*	Make sure that the bars don't get too fat by keeping the xScale range above 5 */
 							if (displayArray.length > 5) {
@@ -1045,52 +1071,60 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 										.attr('opacity', 0);
 									break;
 								case "Single" :
-									headerString = "Single";
-									axisString = "Citations";
+									headerString = "Single author";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "NatFirst" :
-									headerString = "National first";
-									axisString = "Citations";
+									headerString = "First author (national collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "NatLast" :
-									headerString = "National last";
-									axisString = "Citations";
+									headerString = "Last author (national collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "IntFirst" :
-									headerString = "International first";
-									axisString = "Citations";
+									headerString = "First author (international collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "IntLast" :
-									headerString = "International last";
-									axisString = "Citations";
+									headerString = "Last author (international collaboration)";
+									axisString = "Average relative citation (field normalized)";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 1);
 									break;
 
 								case "FMRatio" :
-									headerString = "Female to male ratio";
-									axisString = "Female to male ratio";
+									headerString = "Ratio of female to male authorships";
+									axisString = "Ratio of female to male authorships";
 									key.transition()
 										.duration(duration)
 										.attr('opacity', 0);
 									break;
+								default:
+									headerString = "Total papers published";
+									axisString = "Papers published";
+									key.transition()
+										.duration(duration)
+										.attr('opacity', 0);
+									break;
+
 							}
 
 							d3.select(".outer-wrapper h1").text(headerString);
