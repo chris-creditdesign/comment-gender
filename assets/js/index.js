@@ -10,22 +10,6 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 		{
 
 		/*	==================================================================================== */
-		/*	Remove nav column and add class single-column to constrain-content column
-			so that it will be 956px wide. Bassed on Andrew code.
-			CHECK BEFORE USE!!!!! */
-		var content = $('#constrain-content');
-		var nav = $('#nav');
-
-		setTimeout(function () {
-			if (content && nav) {
-				content.addClass('single-column');
-				nav.remove();
-			} else {
-				setTimeout(arguments.callee, 100);
-			}
-		}, 100);
-
-		/*	==================================================================================== */
 		/*	STATUS MESSAGE FOR NO-JS */
 		/*	We know that javascript is enabled and that we are not in IE 6-8
 			so hide the error message and show outer-wrapper */
@@ -155,7 +139,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 		/*	We now want to load in the data from our html table */
 
 		$.ajax({
-			url: "data/citation-data.html",
+			url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
 				dataType: 'text',
 				success: function (data) {
 					/*	Store each row of the table in a var */
