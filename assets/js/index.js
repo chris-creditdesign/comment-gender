@@ -1,6 +1,3 @@
-/*        Colours for the bars */
-// var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#34495e"];
-var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 /*	==================================================================================== */
 /*	JQUERY READY */
@@ -27,8 +24,11 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 		/*	==================================================================================== */
 		/*	GLOBAL VARIABLES FOR D3 */
 
+		/*  Colours for the bars */
+		var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
+
 		/*	Margin, Width and height */
-		var margin = {top: 15, right: 20, bottom: 20, left: 75};
+		var margin = {top: 15, right: 20, bottom: 20, left: 90};
 		var width = 630  - margin.left - margin.right;
 		var height = 350 - margin.top - margin.bottom;
 		/*	Global variable to control the length of D3 transitons */
@@ -102,7 +102,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 			/* Add the male female key */
 			var key = svg.append("g")
 							.attr("class","axis")
-							.attr("transform", "translate(-49,-5)")
+							.attr("transform", "translate(-57,-5)")
 							.attr("opacity", 0);
 
 			key.append("rect")
@@ -154,8 +154,8 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 
 			$.ajax({
 				// url: "data/citation-data.html",
-				url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
-				// url: "http://www.nature.com/news/7.14179",
+				// url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
+				url: "http://www.nature.com/news/gender-output-collaboration-and-citation-data-7.14179",
 					dataType: 'text',
 					success: function (data) {
 						/*	Store each row of the table in a var */
@@ -394,7 +394,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 							.attr("class", "axisLabel")
 							.append("text")
 							.attr("transform", "rotate(-90)")
-							.attr("y", -margin.left)
+							.attr("y", (15-margin.left))
 							.attr("x", -height)
 							.attr("dy", ".9em")
 							.style("text-anchor", "start");
@@ -875,7 +875,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 							var tooltipHeight = parseInt($(".infobox").css("height"), 10);
 
 							/* Get this bar's x/y values, then augment for the tooltip */
-							var xPosition = parseInt(x, 10) - (tooltipWidth/2) + 65;
+							var xPosition = parseInt(x, 10) - (tooltipWidth/2) + 75;
 							var yPosition = parseInt(y, 10) - (tooltipHeight) - 43;
 
 							/* Update the tooltip position and value */
@@ -902,7 +902,7 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 								});
 						}
 
-						function updateHeader (field) {
+						function updateHeader () {
 
 							switch (field) {
 								case "TotalPaper" :
@@ -964,12 +964,12 @@ var allBars = ["#1abc9c","#27ae60","#3498db","#5959b7","#EB6B4B"];
 									axisString = "Papers published";
 									key.transition()
 										.duration(duration)
-										.attr('opacity', 0);
+										.attr('opacity', 1);
 									break;
 
 							}
 
-							d3.select(".outer-wrapper h1").text(headerString);
+							d3.select(".outer-wrapper h3").text(headerString);
 
 							d3.selectAll(".y .axisLabel text")
 								.text(axisString);

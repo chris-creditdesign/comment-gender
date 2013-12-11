@@ -21,16 +21,22 @@ $colour-5: #EB6B4B;
 }
 
 .outer-wrapper {
-	width: 755px;
-	height: 920px;
+	border: 1px solid #c8c7cf;
 	display: none;
+	padding: 0 0 10px 0;
 
-	h1 {
-		font-size: 1.1em;
-		letter-spacing: 0.1em;
-		padding: 0 0 0 3px;
-		margin: 0;
+	&:after { 
+		content: "."; 
+		visibility: hidden; 
+		display: block; 
+		height: 0; 
+		clear: both;
+	} // What up? It's a clearfix
+
+	h2,h3,p.grahpicStandfirst {
+		padding: 10px 10px 0 10px;
 	}
+
 
 	.count-chart {
 		position: relative;
@@ -107,9 +113,10 @@ $colour-5: #EB6B4B;
 	----------------------------------*/
 	.wrapper {
 		width: 630px;
-		padding: 0 0 0 10px;
+		padding: 0 0 0 15px;
 		float: left;
 		clear: left;
+		box-sizing: border-box;
 
 		h2 {
 			text-transform: uppercase;
@@ -133,7 +140,7 @@ $colour-5: #EB6B4B;
 		form {
 			label {
 				float: left; 
-				width: 115px; 
+				width: 165px; 
 				margin: 0 10px 6px 0;
 				padding: 0 0 0 30px;
 				position: relative;
@@ -205,7 +212,7 @@ $colour-5: #EB6B4B;
 		
 		/* Make the field labels a bit wider */
 		form.field-select label {
-			width: 170px;
+			width: 260px;
 		}
 
 	} // wrapper
