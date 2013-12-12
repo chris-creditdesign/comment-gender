@@ -59,7 +59,7 @@ module.exports = function(grunt){
 						'assets/barchart.html',
 						// 'assets/concat/socket-io.txt',
 						'assets/concat/script-open.txt',
-						'assets/js/index.js',
+						'assets/js/index.min.js',
 						'assets/concat/script-close.txt',
 						'assets/polopoly-footer.html'
 						],
