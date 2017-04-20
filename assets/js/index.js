@@ -56,9 +56,9 @@
 		/* Load D3 */
 		/* All of the D3/svg code is contained within the call back function */
 		/* Loading D3 into ie6-8 seems to cause a runtime error */
-		$.getScript("http://d3js.org/d3.v3.min.js", function() {
+		// $.getScript("http://d3js.org/d3.v3.min.js", function() {
 		// $.getScript("/polopoly_static/js/d3.v3.min.js", function() {
-		// $.getScript("http://www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
+		$.getScript("//www.nature.com/polopoly_static/js/d3.v3.min.js", function() {
 
 			/* Create custom checkboxes */
 			function setupLabel() {
@@ -154,9 +154,7 @@
 			/*	We now want to load in the data from our html table */
 
 			$.ajax({
-				url: "data/citation-data.html",
-				// url: "https://poly-admin1.nature.com/preview/www/2.788/1.14321/7.14179",
-				// url: "http://www.nature.com/news/gender-output-collaboration-and-citation-data-7.14179",
+				url: "//www.nature.com/news/gender-output-collaboration-and-citation-data-7.14179",
 					dataType: 'text',
 					success: function (data) {
 						/*	Store each row of the table in a var */
